@@ -1,23 +1,23 @@
 package app.controller;
 
-import app.model.Facture;
-import app.model.FactureRepository;
+import app.model.Invoice;
+import app.model.InvoiceRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class FactureController {
+public class InvoiceController {
 
-    private final FactureRepository repository;
+    private final InvoiceRepository repository;
 
-    FactureController(FactureRepository repository) {
+    InvoiceController(InvoiceRepository repository) {
         this.repository = repository;
     }
 
-    @GetMapping("/factures")
-     List<Facture> all() {
+    @GetMapping("/invoices")
+     List<Invoice> all() {
         return repository.findAll();
     }
 }

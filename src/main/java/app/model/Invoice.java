@@ -7,15 +7,15 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Facture {
+public class Invoice {
 
     private @Id @GeneratedValue Long id;
     private Float amount;
     private Date date;
 
-    Facture() {}
+    Invoice() {}
 
-    public Facture(Float amount, Date date) {
+    public Invoice(Float amount, Date date) {
         this.amount = amount;
         this.date = date;
     }
@@ -47,9 +47,9 @@ public class Facture {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Facture)) return false;
-        Facture facture = (Facture) o;
-        return id.equals(facture.id) && amount.equals(facture.amount) && date.equals(facture.date);
+        if (!(o instanceof Invoice)) return false;
+        Invoice invoice = (Invoice) o;
+        return id.equals(invoice.id) && amount.equals(invoice.amount) && date.equals(invoice.date);
     }
 
     @Override
