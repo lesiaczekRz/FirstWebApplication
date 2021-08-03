@@ -18,7 +18,7 @@ public class LoadDatabase {
         return args -> {
             log.info("Preloading " + repository.save(new Invoice(10.50f,
                     new SimpleDateFormat("yyyyMMdd").parse("20210802"))));
-            log.info("Preloading " + repository.save(new Invoice(100.00f,
+            log.info("Preloading " + repository.save(new Invoice(1100.00f,
                     new SimpleDateFormat("yyyyMMdd").parse("20210801"))));
         };
     }
