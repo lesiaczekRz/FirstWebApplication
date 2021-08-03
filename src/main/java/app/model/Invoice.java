@@ -59,7 +59,7 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return "Facture{" +
+        return "Invoice{" +
                 "id=" + id +
                 ", amount=" + amount +
                 ", date=" + date +
