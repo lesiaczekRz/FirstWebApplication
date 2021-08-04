@@ -16,9 +16,9 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(InvoiceRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Invoice(10.50f,
+            log.info("Preloading " + repository.save(new Invoice("1/2021", 10.50f,
                     new SimpleDateFormat("yyyyMMdd").parse("20210802"))));
-            log.info("Preloading " + repository.save(new Invoice(1100.00f,
+            log.info("Preloading " + repository.save(new Invoice("2/2021", 1100.00f,
                     new SimpleDateFormat("yyyyMMdd").parse("20210801"))));
         };
     }
