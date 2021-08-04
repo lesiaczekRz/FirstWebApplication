@@ -15,7 +15,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/invoices")
-    String all() {
+    public String displayAll() {
         return InvoiceView.displayInvoices(repository.findAll());
     }
 }
