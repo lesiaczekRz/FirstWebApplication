@@ -11,7 +11,8 @@ public class InvoiceView {
 
     public static String displayInvoices(List<Invoice> invoiceList) {
         StringBuilder html;
-        html = new StringBuilder("<table class=\"table\">");
+        html = new StringBuilder("");
+        html.append("<table class=\"table table-striped table-hover\">");
         html.append("<tr><th scope=\"col\">L.p.</th><th scope=\"col\">Kwota</th><th scope=\"col\">Data</th></tr>");
         int lp = 0;
         for (Invoice invoice : invoiceList) {
