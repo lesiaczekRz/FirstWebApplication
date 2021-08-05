@@ -46,18 +46,20 @@ public class InvoiceView extends DefaultView {
 
         html.append("<div id=\"div-new-invoice\">");
 
+        html.append("<input type=\"hidden\" name=\"numberInvoice\" value=\"\" />");
+
         html.append("<div class=\"row\">");
         html.append("<div class=\"col-lg\">").append("<div class=\"form-group\">");
-        html.append("<label for=\"input-kwota-faktury\">Kwota</label>");
-        html.append("<input type=\"text\" class=\"form-control\" name=\"input-kwota-faktury\" ");
-        html.append("id=\"input-kwota-faktury\" />");
+        html.append("<label for=\"amount\">Kwota</label>");
+        html.append("<input type=\"text\" class=\"form-control\" name=\"amount\" ");
+        html.append("id=\"amount\" />");
         html.append("</div>").append("</div>").append("</div>");
 
         html.append("<div class=\"row\">");
         html.append("<div class=\"col-lg\">").append("<div class=\"form-group\">");
-        html.append("<label for=\"input-data-faktury\">Data faktury [RRRR-MM-DD]</label>");
-        html.append("<input type=\"text\" class=\"form-control\" name=\"input-data-faktury\" ");
-        html.append("id=\"input-data-faktury\" />");
+        html.append("<label for=\"date\">Data faktury [RRRR-MM-DD]</label>");
+        html.append("<input type=\"text\" class=\"form-control\" name=\"date\" ");
+        html.append("id=\"date\" />");
         html.append("</div>").append("</div>").append("</div>");
 
         html.append("</div>");
