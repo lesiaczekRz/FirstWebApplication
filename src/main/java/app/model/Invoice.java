@@ -1,17 +1,23 @@
 package app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Invoice {
 
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable=false,unique=true)
     private String numberInvoice;
+
+    @Column(nullable = false)
     private Float amount;
+
+    @Column(nullable = false)
     private Date date;
 
     Invoice() {}
