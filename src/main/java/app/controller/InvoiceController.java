@@ -1,8 +1,8 @@
 package app.controller;
 
-import app.model.Invoice;
 import app.model.InvoiceModel;
 import app.model.InvoiceRepository;
+import app.model.WrongParameter;
 import app.view.InvoiceView;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +33,12 @@ public class InvoiceController {
     }
 
     @PostMapping("/save-new-invoice")
-    public Invoice saveNewInvoice(@RequestParam Map<String, String> body) {
-        return invoiceModel.changeBodyToInvoice(body);
+    public String saveNewInvoice(@RequestParam Map<String, String> body) {
+        try {
+            repository.save(invoiceModel.changeBodyToInvoice(body));
+            return displayInvoices();
+        } catch (WrongParameter e) {
+            return e.getMessage();
+        }
     }
 }
