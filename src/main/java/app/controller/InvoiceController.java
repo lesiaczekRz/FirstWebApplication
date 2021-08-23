@@ -4,10 +4,7 @@ import app.model.InvoiceModel;
 import app.model.InvoiceRepository;
 import app.model.WrongParameter;
 import app.view.InvoiceView;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -32,13 +29,29 @@ public class InvoiceController {
         return InvoiceView.displayNewInvoice();
     }
 
+    @GetMapping("/invoices/delete/{id}")
+    public String toDeleteInvoice(@PathVariable Long id) {
+        var val = repository.findById(id);
+        if (val.isEmpty()) {
+            return "Błąd! Brak rekordu do usunięcia";
+        } else {
+            return InvoiceView.displayDelete(id, val.get().getNumberInvoice());
+        }
+    }
+
     @PostMapping("/save-new-invoice")
     public String saveNewInvoice(@RequestParam Map<String, String> body) {
         try {
             repository.save(invoiceModel.changeBodyToInvoice(body));
             return displayInvoices();
         } catch (WrongParameter e) {
-            return e.getMessage();
+            return "Błąd! " + e.getMessage();
         }
+    }
+
+    @DeleteMapping("/invoices/{id}")
+    public String deleteInvoice(@PathVariable Long id) {
+        repository.deleteById(id);
+        return displayInvoices();
     }
 }

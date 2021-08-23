@@ -13,7 +13,7 @@ public class InvoiceView extends DefaultView {
         StringBuilder html = new StringBuilder(displayMenu());
         html.append("<table class=\"table table-striped table-hover\">");
         html.append("<tr><th scope=\"col\">L.p.</th><th scope=\"col\">Numer faktury</th>");
-        html.append("<th scope=\"col\">Kwota</th><th scope=\"col\">Data</th></tr>");
+        html.append("<th scope=\"col\">Kwota</th><th scope=\"col\">Data</th><th>Funkcje</th></tr>");
         int lp = 0;
         for (Invoice invoice : invoiceList) {
             html.append("<tr>");
@@ -21,6 +21,10 @@ public class InvoiceView extends DefaultView {
             html.append("<td>").append(invoice.getNumberInvoice()).append("</td>");
             html.append("<td>").append(DF_POLISH.format(invoice.getAmount())).append("</td>");
             html.append("<td>").append(invoice.getDate().toString(), 0, 10).append("</td>");
+            html.append("<td><a href=\"/invoices/delete/").append(invoice.getId());
+            html.append("\" class=\"btn btn-secondary\">");
+            html.append("Usuń");
+            html.append("</a></td>");
             html.append("</tr>");
         }
         html.append("</table>");
@@ -31,7 +35,7 @@ public class InvoiceView extends DefaultView {
         StringBuilder html;
         html = new StringBuilder();
         html.append("<div id=\"div-menu\">");
-        html.append("<a href=\"new-invoice\" class=\"btn btn-secondary\">");
+        html.append("<a href=\"/new-invoice\" class=\"btn btn-secondary\">");
         html.append("Nowa faktura");
         html.append("</a>");
         html.append("</div>");
@@ -42,7 +46,7 @@ public class InvoiceView extends DefaultView {
     public static String displayNewInvoice() {
         StringBuilder html;
         html = new StringBuilder();
-        html.append("<form action=\"save-new-invoice\" method=\"post\">");
+        html.append("<form action=\"/save-new-invoice\" method=\"post\">");
 
         html.append("<div id=\"div-new-invoice\">");
 
@@ -70,4 +74,15 @@ public class InvoiceView extends DefaultView {
         return getMainTemplateHtml(html.toString());
     }
 
+    public static String displayDelete(Long id, String numberInvoice) {
+        StringBuilder html;
+        html = new StringBuilder();
+
+        html.append("<form action=\"/invoices/").append(id).append("?_method=DELETE\" method=\"post\">");
+        html.append("<h2>Usunąć fakturę ").append(numberInvoice).append("?</h2>");
+        html.append("<a href=\"/invoices\" class=\"btn btn-secondary\">Nie</a>");
+        html.append("<button type=\"submit\" class=\"btn btn-secondary\">Tak</button>");
+        html.append("</form>");
+        return getMainTemplateHtml(html.toString());
+    }
 }
