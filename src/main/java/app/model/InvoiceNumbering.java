@@ -19,7 +19,7 @@ public class InvoiceNumbering {
         String lastNumber = repository.getLastNumberVoice();
         int n;
         if (lastNumber == null) {
-            return null;
+            lastNumber = "0/0";
         }
         String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         String[] arrayNumber = lastNumber.split("/");
