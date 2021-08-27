@@ -39,10 +39,20 @@ public class InvoiceController {
         }
     }
 
+    @GetMapping("/invoices/edit/{id}")
+    public String toEditInvoice(@PathVariable Long id) {
+        var val = repository.findById(id);
+        if (val.isEmpty()) {
+            return "Błąd! Brak rekordu do edycji";
+        } else {
+            return InvoiceView.displayEdit(id, val.get());
+        }
+    }
+
     @PostMapping("/save-new-invoice")
     public String saveNewInvoice(@RequestParam Map<String, String> body) {
         try {
-            repository.save(invoiceModel.changeBodyToInvoice(body));
+            repository.save(invoiceModel.changeBodyToInvoice(body, null));
             return displayInvoices();
         } catch (WrongParameter e) {
             return "Błąd! " + e.getMessage();
@@ -53,5 +63,15 @@ public class InvoiceController {
     public String deleteInvoice(@PathVariable Long id) {
         repository.deleteById(id);
         return displayInvoices();
+    }
+
+    @PutMapping("/invoices/{id}")
+    public String editInvoice(@RequestParam Map<String, String> body, @PathVariable Long id) {
+        try {
+            repository.save(invoiceModel.changeBodyToInvoice(body, id));
+            return displayInvoices();
+        } catch (WrongParameter e) {
+            return "Błąd! " + e.getMessage();
+        }
     }
 }

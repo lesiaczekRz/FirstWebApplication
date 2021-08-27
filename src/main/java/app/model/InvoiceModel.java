@@ -15,12 +15,20 @@ public class InvoiceModel {
      * Zamienia dane przesłane z formularza z Map na Invoice
      *
      * @param body {@link Map}
+     * @param id {@link Long}
      * @return Invoice
      */
-    public Invoice changeBodyToInvoice(Map<String, String> body) throws WrongParameter {
-        Invoice invoice = new Invoice();
-        InvoiceNumbering invoiceNumbering = new InvoiceNumbering(repository);
-        String numberInvoice = invoiceNumbering.getNextNumberInvoice();
+    public Invoice changeBodyToInvoice(Map<String, String> body, Long id) throws WrongParameter {
+        Invoice invoice;
+        String numberInvoice;
+        if (id == null) {
+            invoice = new Invoice();
+            InvoiceNumbering invoiceNumbering = new InvoiceNumbering(repository);
+            numberInvoice = invoiceNumbering.getNextNumberInvoice();
+        } else {
+            invoice = repository.getById(id);
+            numberInvoice = invoice.getNumberInvoice();
+        }
         Float amount = Conversion.changeToFloat(body.get("amount"));
         Date date = Conversion.changeToDate(body.get("date"));
         invoice.setNumberInvoice(numberInvoice);
